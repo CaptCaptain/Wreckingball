@@ -15,13 +15,6 @@ settings {
                 "workshopExpanseNight"
             ]
         }
-    },
-    "heroes": {
-        "allTeams": {
-            "general": {
-                "movementSpeed%": 200
-            }
-        }
     }
 }
 
@@ -37,7 +30,7 @@ enum MAP_DATA:
     WORKSHOP_ISLAND_SPAWNS = [vect(0, 0, 0)],
     WORKSHOP_EXPANSE_TEAM_1 = [vect(25, 0, 0), 4],
     WORKSHOP_EXPANSE_TEAM_2 = [vect(-25, 0, 0), 4],
-    WORKSHOP_EXPANSE_ARENA = [vect(0, 1, 0), 30],
+    WORKSHOP_EXPANSE_ARENA = [vect(0, 0, 0), 30],
     WORKSHOP_EXPANSE_SPAWNS = [vect(0, 0, 0)],
     PARIS_TEAM_1 = [vect(-128, 13, -90.80), 3],
     PARIS_TEAM_2 = [vect(-83.24, 13, -113.22), 3],

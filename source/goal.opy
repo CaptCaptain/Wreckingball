@@ -81,6 +81,7 @@ def CREATE_GOAL_EFFECTS():
     GOAL_EFFECTS.append(getLastCreatedText())
 
     # Arena
+    /*
     createBeam(getAllPlayers(), Beam.BAD, ARENA[0] + vect(ARENA[1], 0, ARENA[1]), ARENA[0] + vect(-ARENA[1], 0, ARENA[1]), Color.ROSE, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.BAD, ARENA[0] + vect(ARENA[1], 0, ARENA[1]), ARENA[0] + vect(ARENA[1], 0, -ARENA[1]), Color.ROSE, EffectReeval.VISIBILITY_AND_COLOR)
@@ -88,6 +89,9 @@ def CREATE_GOAL_EFFECTS():
     createBeam(getAllPlayers(), Beam.BAD, ARENA[0] + vect(-ARENA[1], 0, ARENA[1]), ARENA[0] + vect(-ARENA[1], 0, -ARENA[1]), Color.ROSE, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.BAD, ARENA[0] + vect(ARENA[1], 0, -ARENA[1]), ARENA[0] + vect(-ARENA[1], 0, -ARENA[1]), Color.ROSE, EffectReeval.VISIBILITY_AND_COLOR)
+    GOAL_EFFECTS.append(getLastCreatedEntity())
+    */
+    createEffect(getAllPlayers(), Effect.LIGHT_SHAFT, Color.ROSE, ARENA[0], ARENA[1], EffectReeval.VISIBILITY)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
 def CLEAR_GOAL_EFFECTS():
@@ -102,7 +106,7 @@ rule "Create Goals":
 rule "Keep in Arena":
     @Event eachPlayer
     @Condition not eventPlayer.isInSpawnRoom()
-    @Condition distance(eventPlayer.getPosition(), vect(ARENA[0].x, eventPlayer.getPosition().y, ARENA[0].z)) > ARENA[1] + 1
+    @Condition distance(eventPlayer.getPosition(), vect(ARENA[0].x, eventPlayer.getPosition().y, ARENA[0].z)) > ARENA[1]
 
     # Accelerate players toward the goal whose team has ownership of the ball
     eventPlayer.startAcceleration(directionTowards(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(TEAM_PHYSICS_OWNERSHIP)]), 500, 500, Relativity.TO_WORLD, AccelReeval.DIRECTION_RATE_AND_MAX_SPEED)

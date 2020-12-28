@@ -43,7 +43,7 @@ rule "Player Setup":
     eventPlayer.setDamageReceived(500)
     eventPlayer.disableGamemodeHud()
     eventPlayer.setMoveSpeed(SETTING_SPEED_SCALAR * 100)
-    eventPlayer.setJumpVerticalSpeed(100 + ((SETTING_SPEED_SCALAR * 100) / 2))
+    eventPlayer.setJumpVerticalSpeed(100 + ((SETTING_SPEED_SCALAR * 100) / 4))
 
 rule "Teleport to Goal":
     @Event eachPlayer
