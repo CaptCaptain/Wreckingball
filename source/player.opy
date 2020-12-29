@@ -4,31 +4,34 @@
 
 playervar HUDS = []
 
-rule "Player Hud":
-    @Event playerJoined
-    @Condition not eventPlayer.isDummy()
+subroutine DESTROY_HUDS
 
+def DESTROY_HUDS():
     for eventPlayer.PLAYER_INDEX in range(0, len(eventPlayer.HUDS)):
         destroyHudText(eventPlayer.HUDS[GLOBAL_INDEX])
     eventPlayer.HUDS = []
 
+rule "Player Hud":
+    @Event playerJoined
+    @Condition not eventPlayer.isDummy()
+
+    DESTROY_HUDS()
+
     wait()
 
-    hudText(eventPlayer, evalOnce("{} SCORE".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE))), "", "ENEMY TEAM: {}\nYOUR TEAM: {}\nSCORE TO WIN: {}".format([TEAM_1_SCORE, TEAM_2_SCORE][[Team.2, Team.1].index(eventPlayer.getTeam())], [TEAM_1_SCORE, TEAM_2_SCORE][[Team.1, Team.2].index(eventPlayer.getTeam())], SETTING_SCORE_NEEDED), HudPosition.LEFT, 0, Color.LIME_GREEN, Color.ROSE, Color.TURQUOISE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer, "{} to {}".format([TEAM_1_SCORE, TEAM_2_SCORE][[Team.1, Team.2].index(eventPlayer.getTeam())], [TEAM_1_SCORE, TEAM_2_SCORE][[Team.2, Team.1].index(eventPlayer.getTeam())]), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
-    hudSubtext(eventPlayer if distance(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(eventPlayer.getTeam())]) < [TEAM_1_GOAL[1], TEAM_2_GOAL[1]][[Team.1, Team.2].index(eventPlayer.getTeam())] else null," {}PRESS {} TO SWITCH HEROES".format(evalOnce("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"), buttonString(Button.INTERACT)), HudPosition.TOP, 1, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if distance(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(eventPlayer.getTeam())]) < [TEAM_1_GOAL[1], TEAM_2_GOAL[1]][[Team.1, Team.2].index(eventPlayer.getTeam())] else null," {}PRESS {} TO SWITCH HEROES".format(evalOnce("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"), buttonString(Button.INTERACT)), HudPosition.TOP, 2, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
     hudText(eventPlayer, "ROUND {}".format(ROUND_NUMBER), "", "Time Remaining:\n{}:{}".format(floor(((TIME_REMAINING % 86400) % 3600) / 60), floor(((TIME_REMAINING % 86400) % 3600) % 60)) if TIME_REMAINING > 60 else "Time Remaining:\n{}".format(TIME_REMAINING), HudPosition.TOP, 0, Color.TURQUOISE, Color.ROSE, Color.ROSE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
-rule "Player Hud":
+rule "Destroy Player Hud":
     @Event playerLeft
 
-    for eventPlayer.PLAYER_INDEX in range(0, len(eventPlayer.HUDS)):
-        destroyHudText(eventPlayer.HUDS[GLOBAL_INDEX])
-    eventPlayer.HUDS = []
+    DESTROY_HUDS()
 
 rule "Player Setup":
     @Event eachPlayer
