@@ -78,7 +78,10 @@ def KILL_BALL():
     # Hides the kill message temporarily and kills the Wrecking Ball dummies
     getAllPlayers().disableMessages()
     wait(0.032)
-    kill(WRECKING_BALLS, LAST_PUSHED_PLAYER if LAST_PUSHED_PLAYER.getTeam() == Team.1 and distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) < TEAM_2_GOAL[1] or LAST_PUSHED_PLAYER.getTeam() == Team.2 and distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) < TEAM_1_GOAL[1] else null)
+    if CURRENT_GAME_STATE == GAME_STATE.WAITING_FOR_PLAYERS:
+        kill(WRECKING_BALLS, null)
+    else:
+        kill(WRECKING_BALLS, LAST_PUSHED_PLAYER if LAST_PUSHED_PLAYER.getTeam() == Team.1 and distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) < TEAM_2_GOAL[1] or LAST_PUSHED_PLAYER.getTeam() == Team.2 and distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) < TEAM_1_GOAL[1] else null)
     wait(0.032)
     getAllPlayers().enableMessages()
 

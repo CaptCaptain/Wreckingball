@@ -5,6 +5,14 @@
 playervar HUDS = []
 
 subroutine DESTROY_HUDS
+subroutine DESTROY_CONSTRUCTION
+
+def DESTROY_CONSTRUCTION():
+    eventPlayer.forceButtonPress(Button.INTERACT)
+    wait(0.125)
+    eventPlayer.forceButtonPress(Button.ABILITY_2)
+    wait(0.125)
+    if RULE_CONDITION: goto RULE_START
 
 def DESTROY_HUDS():
     for eventPlayer.PLAYER_INDEX in range(0, len(eventPlayer.HUDS)):
@@ -19,13 +27,22 @@ rule "Player Hud":
 
     wait()
 
-    hudSubtext(eventPlayer, "{} to {}".format([TEAM_1_SCORE, TEAM_2_SCORE][[Team.1, Team.2].index(eventPlayer.getTeam())], [TEAM_1_SCORE, TEAM_2_SCORE][[Team.2, Team.1].index(eventPlayer.getTeam())]), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if CURRENT_GAME_STATE != GAME_STATE.WAITING_FOR_PLAYERS and SETTING_WHILE_YOU_WAIT == false else null, "{} to {}".format([TEAM_1_SCORE, TEAM_2_SCORE][[Team.1, Team.2].index(eventPlayer.getTeam())], [TEAM_1_SCORE, TEAM_2_SCORE][[Team.2, Team.1].index(eventPlayer.getTeam())]), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
     hudSubtext(eventPlayer if distance(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(eventPlayer.getTeam())]) < [TEAM_1_GOAL[1], TEAM_2_GOAL[1]][[Team.1, Team.2].index(eventPlayer.getTeam())] else null," {}PRESS {} TO SWITCH HEROES".format(evalOnce("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"), buttonString(Button.INTERACT)), HudPosition.TOP, 2, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
-    hudText(eventPlayer, "ROUND {}".format(ROUND_NUMBER), "", "Time Remaining:\n{}:{}".format(floor(((TIME_REMAINING % 86400) % 3600) / 60), floor(((TIME_REMAINING % 86400) % 3600) % 60)) if TIME_REMAINING > 60 else "Time Remaining:\n{}".format(TIME_REMAINING), HudPosition.TOP, 0, Color.TURQUOISE, Color.ROSE, Color.ROSE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudText(eventPlayer if CURRENT_GAME_STATE != GAME_STATE.WAITING_FOR_PLAYERS else null, "ROUND {}".format(ROUND_NUMBER), "", "Time Remaining:\n{}:{}".format(floor(((TIME_REMAINING % 86400) % 3600) / 60), floor(((TIME_REMAINING % 86400) % 3600) % 60)) if TIME_REMAINING > 60 else "Time Remaining:\n{}".format(TIME_REMAINING), HudPosition.TOP, 0, Color.TURQUOISE, Color.ROSE, Color.ROSE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    eventPlayer.HUDS.append(getLastCreatedText())
+
+    hudHeader(eventPlayer if CURRENT_GAME_STATE == GAME_STATE.WAITING_FOR_PLAYERS else null, "WAITING FOR PLAYERS", HudPosition.TOP, 0, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    eventPlayer.HUDS.append(getLastCreatedText())
+
+    hudSubtext(eventPlayer, "{} Wreckingball Soccer by CaptCaptain#11421".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 1, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    eventPlayer.HUDS.append(getLastCreatedText())
+
+    hudSubheader(eventPlayer, "Version: 1.0.0".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
 rule "Destroy Player Hud":
@@ -174,3 +191,27 @@ rule "Reduce Secondary Cooldown":
 
     if eventPlayer.getCurrentHero() == Hero.SOMBRA or eventPlayer.getHeroOfDuplication() == Hero.SOMBRA: return
     halfAbilityCooldown(Button.SECONDARY_FIRE)
+
+rule "Destroy Symmetra Teleporter":
+    @Event eachPlayer
+    @Hero symmetra
+    @Condition eventPlayer.isUsingAbility2()
+    @Condition CURRENT_GAME_STATE == GAME_STATE.SETUP or CURRENT_GAME_STATE == GAME_STATE.RESULT
+
+    DESTROY_CONSTRUCTION()
+
+rule "Destroy Torb Turret":
+    @Event eachPlayer
+    @Hero torbjorn
+    @Condition eventPlayer.isUsingAbility1()
+    @Condition CURRENT_GAME_STATE == GAME_STATE.SETUP or CURRENT_GAME_STATE == GAME_STATE.RESULT
+
+    DESTROY_CONSTRUCTION()
+
+rule "Destroy Sombra Translocator":
+    @Event eachPlayer
+    @Hero sombra
+    @Condition eventPlayer.isUsingAbility2()
+    @Condition CURRENT_GAME_STATE == GAME_STATE.SETUP or CURRENT_GAME_STATE == GAME_STATE.RESULT
+
+    DESTROY_CONSTRUCTION()
