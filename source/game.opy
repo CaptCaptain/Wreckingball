@@ -2,11 +2,30 @@
 
 globalvar ROUND_RESULT
 
+subroutine DISABLE_ABILITIES
+subroutine ENABLE_ABILITIES
+
+def DISABLE_ABILITIES():
+    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.PRIMARY_FIRE)
+    getAllPlayers().exclude(WRECKING_BALLS).setSecondaryFireEnabled(false)
+    getAllPlayers().exclude(WRECKING_BALLS).setAbility1Enabled(false)
+    getAllPlayers().exclude(WRECKING_BALLS).setAbility2Enabled(false)
+    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.ULTIMATE)
+
+def ENABLE_ABILITIES():
+    getAllPlayers().exclude(WRECKING_BALLS).allowButton(Button.PRIMARY_FIRE)
+    getAllPlayers().exclude(WRECKING_BALLS).setSecondaryFireEnabled(true)
+    getAllPlayers().exclude(WRECKING_BALLS).setAbility1Enabled(true)
+    getAllPlayers().exclude(WRECKING_BALLS).setAbility2Enabled(true)
+    getAllPlayers().exclude(WRECKING_BALLS).allowButton(Button.ULTIMATE)
+
 rule "Waiting for Players":
     @Condition CURRENT_GAME_STATE == GAME_STATE.WAITING_FOR_PLAYERS
     @Condition len(getPlayers(Team.1).exclude(WRECKING_BALLS)) > 0 and len(getPlayers(Team.2).exclude(WRECKING_BALLS)) > 0
 
-    waitUntil(all([player.hasSpawned() for player in getAllPlayers()]), 9999)
+    waitUntil(all([player.hasSpawned() for player in getAllPlayers()]) and not BALL_RESETTING, 9999)
+
+    wait(1)
 
     # Reset ultimate charge for everyone and begin game
     CURRENT_GAME_STATE = GAME_STATE.SETUP
@@ -14,14 +33,14 @@ rule "Waiting for Players":
 
 rule "Spawn Ball":
     CREATE_BALL()
-    RESET_BALL()
 
 rule "Reset Ball":
     @Condition (distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) < TEAM_2_GOAL[1] or distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) < TEAM_1_GOAL[1]) or (WRECKING_BALLS[Team1].isDead() and WRECKING_BALLS[Team2].isDead())
     @Condition CURRENT_GAME_STATE == GAME_STATE.WAITING_FOR_PLAYERS
-
+    
     KILL_BALL()
     wait(1, Wait.ABORT_WHEN_FALSE)
+    TEAM_PHYSICS_OWNERSHIP = getOppositeTeam(TEAM_PHYSICS_OWNERSHIP)
     RESET_BALL()
 
 rule "Setup":
@@ -38,11 +57,8 @@ rule "Setup":
     getPlayers(Team.2).exclude(WRECKING_BALLS).setFacing(directionTowards(TEAM_2_GOAL[0], TEAM_1_GOAL[0]), Relativity.TO_WORLD)
     getPlayers(Team.1).exclude(WRECKING_BALLS).teleport(TEAM_1_GOAL[0])
     getPlayers(Team.2).exclude(WRECKING_BALLS).teleport(TEAM_2_GOAL[0])
-    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.PRIMARY_FIRE)
-    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.SECONDARY_FIRE)
-    getAllPlayers().exclude(WRECKING_BALLS).setAbility2Enabled(false)
-    getAllPlayers().exclude(WRECKING_BALLS).setAbility2Enabled(false)
-    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.ULTIMATE)
+    DISABLE_ABILITIES()
+    
     TEAM_PHYSICS_OWNERSHIP = getOppositeTeam(TEAM_PHYSICS_OWNERSHIP)
     LAST_PUSHED_PLAYER = null
 
@@ -56,11 +72,7 @@ rule "Round":
     @Condition CURRENT_GAME_STATE == GAME_STATE.ROUND
 
     getAllPlayers().exclude(WRECKING_BALLS).clearStatusEffect(Status.ROOTED)
-    getAllPlayers().exclude(WRECKING_BALLS).allowButton(Button.PRIMARY_FIRE)
-    getAllPlayers().exclude(WRECKING_BALLS).allowButton(Button.SECONDARY_FIRE)
-    getAllPlayers().exclude(WRECKING_BALLS).setAbility1Enabled(true)
-    getAllPlayers().exclude(WRECKING_BALLS).setAbility2Enabled(true)
-    getAllPlayers().exclude(WRECKING_BALLS).allowButton(Button.ULTIMATE)
+    ENABLE_ABILITIES()
     chase(TIME_REMAINING, 0, rate=1, ChaseReeval.NONE)
 
 rule "Score":
@@ -78,13 +90,8 @@ rule "Score":
 
     # Kill any hero duplicating, and remove any Symmetra teleporters
     kill([player for player in getPlayersOnHero(Hero.ECHO, Team.ALL) if player.isDuplicatingAHero()], null)
-    getPlayersOnHero(Hero.SYMMETRA, Team.ALL).forceButtonPress(Button.SECONDARY_FIRE)
 
-    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.PRIMARY_FIRE)
-    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.SECONDARY_FIRE)
-    getAllPlayers().exclude(WRECKING_BALLS).setAbility1Enabled(false)
-    getAllPlayers().exclude(WRECKING_BALLS).setAbility2Enabled(false)
-    getAllPlayers().exclude(WRECKING_BALLS).disallowButton(Button.ULTIMATE)
+    DISABLE_ABILITIES()
 
     CURRENT_GAME_STATE = GAME_STATE.RESULT
 
