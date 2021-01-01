@@ -1,6 +1,6 @@
 settings {
     "main": {
-        "description": 'In this fast-paced 4v4 brawl, play as any hero and score goals for your team! Damaging or healing the ball will cause it to move. Certain effects/knockback will not apply to the ball if the team does not have ownership. To take ownership for your team, damage the ball (healing will not count).\n[Created by CaptCaptain#11421]'
+        "description": "In this fast-paced 4v4 brawl, there is one ball and a goal for each team. In order to score, the team must push the ball into the opposing team's goal. The ball can be pushed through dealing damage or healing it.\n[Created by CaptCaptain#11421]"
     },
     "lobby": {
         "team1Slots": 4,

@@ -88,7 +88,7 @@ rule "Score":
     setSlowMotion(30)
     bigMessage(getAllPlayers() if (LAST_PUSHED_PLAYER.getTeam() == Team.1 and distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) < TEAM_2_GOAL[1]) or (LAST_PUSHED_PLAYER.getTeam() == Team.2 and distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) < TEAM_1_GOAL[1]) else null, "{} scored!".format(LAST_PUSHED_PLAYER))
 
-    # Kill any hero duplicating, and remove any Symmetra teleporters
+    # Kill any hero duplicating
     kill([player for player in getPlayersOnHero(Hero.ECHO, Team.ALL) if player.isDuplicatingAHero()], null)
 
     DISABLE_ABILITIES()

@@ -3,6 +3,7 @@
 #!define halfAbilityCooldown(button) eventPlayer.setAbilityCooldown(button, eventPlayer.getAbilityCooldown(button) / 2)
 
 playervar HUDS = []
+globalvar HeroRoster = getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN, Hero.ASHE])
 
 subroutine DESTROY_HUDS
 subroutine DESTROY_CONSTRUCTION
@@ -69,7 +70,7 @@ rule "Player Hero Roster":
     @Event eachPlayer
     @Condition eventPlayer in WRECKING_BALLS == false
 
-    eventPlayer.setAllowedHeroes(getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN]))
+    eventPlayer.setAllowedHeroes(HeroRoster)
 
 rule "Teleport to Goal":
     @Event eachPlayer
@@ -90,7 +91,7 @@ rule "Switch Heroes":
 
     eventPlayer.setAllowedHeroes(eventPlayer.getAllowedHeroes().exclude(eventPlayer.getCurrentHero()))
     wait(0.25)
-    eventPlayer.setAllowedHeroes(getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN]))
+    eventPlayer.setAllowedHeroes(HeroRoster)
 
 rule "Allow Primary: Reinhardt":
     @Event eachPlayer
