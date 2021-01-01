@@ -42,7 +42,7 @@ rule "Player Hud":
     hudSubtext(eventPlayer, "{} Wreckingball Soccer by CaptCaptain#11421".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 1, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
-    hudSubheader(eventPlayer, "Version: 1.0.0".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubheader(eventPlayer, "Version: 1.0.0 [BETA]".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
 rule "Destroy Player Hud":
@@ -65,6 +65,12 @@ rule "Player Setup":
     eventPlayer.setMoveSpeed(SETTING_SPEED_SCALAR * 100)
     eventPlayer.setJumpVerticalSpeed(100 + ((SETTING_SPEED_SCALAR * 100) / 4))
 
+rule "Player Hero Roster":
+    @Event eachPlayer
+    @Condition eventPlayer in WRECKING_BALLS == false
+
+    eventPlayer.setAllowedHeroes(getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN]))
+
 rule "Teleport to Goal":
     @Event eachPlayer
     @Hero all
@@ -84,7 +90,7 @@ rule "Switch Heroes":
 
     eventPlayer.setAllowedHeroes(eventPlayer.getAllowedHeroes().exclude(eventPlayer.getCurrentHero()))
     wait(0.25)
-    eventPlayer.resetHeroAvailability()
+    eventPlayer.setAllowedHeroes(getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN]))
 
 rule "Allow Primary: Reinhardt":
     @Event eachPlayer
