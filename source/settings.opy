@@ -1,10 +1,10 @@
 settings {
     "main": {
-        "description": 'In this fast-paced 5v5 brawl, play as any hero and score goals for your team! Damaging or healing the ball will cause it to move. Certain effects/knockback will not apply to the ball if the team does not have ownership. To take ownership for your team, damage the ball (healing will not count).\n[Created by CaptCaptain#11421]'
+        "description": 'In this fast-paced 4v4 brawl, play as any hero and score goals for your team! Damaging or healing the ball will cause it to move. Certain effects/knockback will not apply to the ball if the team does not have ownership. To take ownership for your team, damage the ball (healing will not count).\n[Created by CaptCaptain#11421]'
     },
     "lobby": {
-        "team1Slots": 5,
-        "team2Slots": 5,
+        "team1Slots": 4,
+        "team2Slots": 4,
         "mapRotation": "afterGame",
         "returnToLobby": "never",
         "teamBalancing": "afterGame"
