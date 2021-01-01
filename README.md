@@ -1,6 +1,6 @@
 # Wreckingball Source Code
 
-A fast-paced 5v5 brawl where each team must score goals using a ball.
+A fast-paced 4v4 brawl where each team must score goals using a ball.
 
 # Dependencies
 
