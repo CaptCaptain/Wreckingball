@@ -92,7 +92,7 @@ def SET_PHYSICS_OWNERSHIP_START():
 
 rule "Force Into Ball Form":
     @Event global
-    @Condition len([ball for ball in WRECKING_BALLS if not ball.isInAlternateForm()]) > 0
+    @Condition any([not ball.isInAlternateForm() for ball in WRECKING_BALLS])
     
     [ball for ball in WRECKING_BALLS if not ball.isInAlternateForm()].forceButtonPress(Button.ABILITY_1)
     wait(0.25)
@@ -101,7 +101,7 @@ rule "Force Into Ball Form":
 
 rule "Force Half Health Ball":
     @Event global
-    @Condition len([ball for ball in WRECKING_BALLS if ball.getNormalizedHealth() == 1]) > 0
+    @Condition any([ball.getNormalizedHealth() == 1 for ball in WRECKING_BALLS])
 
     damage([ball for ball in WRECKING_BALLS if ball.getNormalizedHealth() == 1], null, 100)
     wait()
@@ -208,3 +208,11 @@ rule "Set Team Ownership When Reinhardt Pins Ball":
     waitUntil(not eventPlayer.isUsingAbility1(), 3)
     WRECKING_BALLS.clearStatusEffect(Status.INVINCIBLE)
     ATTACHING_ALLOWED = true
+rule "Zarya Bubble Disappearing Fix":
+    @Condition any([ball.hasStatusEffect(Status.INVINCIBLE) for ball in WRECKING_BALLS])
+
+    WRECKING_BALLS.setDamageReceived(0)
+
+    waitUntil(all([not ball.hasStatusEffect(Status.INVINCIBLE) for ball in WRECKING_BALLS]), 9999)
+
+    WRECKING_BALLS.setDamageReceived(100)
