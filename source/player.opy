@@ -31,7 +31,7 @@ rule "Player Hud":
     hudSubtext(eventPlayer if CURRENT_GAME_STATE != GAME_STATE.WAITING_FOR_PLAYERS and SETTING_WHILE_YOU_WAIT == false else null, "{} to {}".format([TEAM_1_SCORE, TEAM_2_SCORE][[Team.1, Team.2].index(eventPlayer.getTeam())], [TEAM_1_SCORE, TEAM_2_SCORE][[Team.2, Team.1].index(eventPlayer.getTeam())]), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
-    hudSubtext(eventPlayer if distance(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(eventPlayer.getTeam())]) < [TEAM_1_GOAL[1], TEAM_2_GOAL[1]][[Team.1, Team.2].index(eventPlayer.getTeam())] else null," {}PRESS {} TO SWITCH HEROES".format(evalOnce("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"), buttonString(Button.INTERACT)), HudPosition.TOP, 2, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if distance(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(eventPlayer.getTeam())]) < [TEAM_1_GOAL[1], TEAM_2_GOAL[1]][[Team.1, Team.2].index(eventPlayer.getTeam())] else null," {}{}".format(evalOnce("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"), "PRESS {} TO SWITCH HEROES".format(buttonString(Button.INTERACT)) if CURRENT_GAME_STATE != GAME_STATE.ROUND else "YOU CANNOT SWITCH HEROES DURING THE ROUND"), HudPosition.TOP, 2, Color.YELLOW if CURRENT_GAME_STATE != GAME_STATE.ROUND else Color.RED, HudReeval.VISIBILITY_STRING_AND_COLOR, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
     hudText(eventPlayer if CURRENT_GAME_STATE != GAME_STATE.WAITING_FOR_PLAYERS else null, "ROUND {}".format(ROUND_NUMBER), "", "Time Remaining:\n{}:{}".format(floor(((TIME_REMAINING % 86400) % 3600) / 60), floor(((TIME_REMAINING % 86400) % 3600) % 60)) if TIME_REMAINING > 60 else "Time Remaining:\n{}".format(TIME_REMAINING), HudPosition.TOP, 0, Color.TURQUOISE, Color.ROSE, Color.ROSE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
@@ -88,9 +88,10 @@ rule "Teleport to Goal":
 rule "Switch Heroes":
     @Event eachPlayer
     @Hero all
-    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
+    @Condition CURRENT_GAME_STATE != GAME_STATE.ROUND
     @Condition distance(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(eventPlayer.getTeam())]) < [TEAM_1_GOAL[1], TEAM_2_GOAL[1]][[Team.1, Team.2].index(eventPlayer.getTeam())]
     @Condition eventPlayer in WRECKING_BALLS == false
+    @Condition eventPlayer.isHoldingButton(Button.INTERACT)
 
     eventPlayer.setAllowedHeroes(eventPlayer.getAllowedHeroes().exclude(eventPlayer.getCurrentHero()))
     wait(0.25)
