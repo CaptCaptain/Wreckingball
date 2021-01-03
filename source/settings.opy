@@ -18,8 +18,6 @@ settings {
     }
 }
 
-#!obfuscate noConstantObfuscation
-
 globalvar GLOBAL_INDEX = 0
 playervar PLAYER_INDEX = 0
 
