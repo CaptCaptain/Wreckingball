@@ -1,6 +1,6 @@
 settings {
     "main": {
-        "description": "In this fast-paced 4v4 brawl, there is one ball and a goal for each team. In order to score, the team must push the ball into the opposing team's goal. The ball can be pushed through dealing damage or healing it.\n[Created by CaptCaptain#11421]"
+        "description": "In this fast-paced 4v4 brawl, there is one ball and a goal for each team. In order to score, the team must push the ball into the opposing team's goal. The ball can be pushed through dealing damage or healing it.\n[Created by CaptCaptain#11421] [https://workshop.codes/ball-soccer]"
     },
     "lobby": {
         "team1Slots": 4,

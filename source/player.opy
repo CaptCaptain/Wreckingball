@@ -43,7 +43,10 @@ rule "Player Hud":
     hudSubtext(eventPlayer, "{} Wreckingball Soccer by CaptCaptain#11421".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 1, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
-    hudSubheader(eventPlayer, "Version: 1.0.0 [BETA]".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubheader(eventPlayer, "Current Version: 1.0.0 [BETA]".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    eventPlayer.HUDS.append(getLastCreatedText())
+
+    hudSubheader(eventPlayer, "https://workshop.codes/ball-soccer".format(abilityIconString(Hero.HAMMOND, Button.ABILITY_1)), HudPosition.RIGHT, 2, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     eventPlayer.HUDS.append(getLastCreatedText())
 
 rule "Destroy Player Hud":
