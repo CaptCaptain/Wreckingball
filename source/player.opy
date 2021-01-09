@@ -184,6 +184,7 @@ rule "Reduce Ability 1 Cooldown":
     @Condition eventPlayer.isUsingAbility1() == false
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0
 
+    if eventPlayer.getCurrentHero() == Hero.ROADHOG or eventPlayer.getHeroOfDuplication() == Hero.ROADHOG: return
     halfAbilityCooldown(Button.ABILITY_1)
 
 rule "Reduce Ability 2 Cooldown":
