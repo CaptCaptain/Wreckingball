@@ -35,7 +35,7 @@ def CREATE_BALL():
     ATTACHING_ALLOWED = true
 
     # Label and scale ball
-    createInWorldText([getAllPlayers()], "BALL", WRECKING_BALLS[Team1], 1.5, Clip.SURFACES, WorldTextReeval.VISIBILITY_POSITION_AND_COLOR, Color.TEAM_1 if TEAM_PHYSICS_OWNERSHIP == Team.1 else Color.TEAM_2, SpecVisibility.DEFAULT)
+    createInWorldText([getAllPlayers()], "{}\nBALL".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE)), WRECKING_BALLS[Team1], 1.5, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_COLOR, Color.YELLOW, SpecVisibility.DEFAULT)
     WRECKING_BALL_EFFECTS.append(getLastCreatedText())
     WRECKING_BALLS.startForcingButton(Button.INTERACT)
     startDamageModification(WRECKING_BALLS, getPlayersOnHero(Hero.BRIGITTE, Team.ALL), 150, DamageReeval.RECEIVERS_AND_DAMAGERS)
@@ -147,7 +147,7 @@ rule "Set Physics Ownership to Team 2":
     WRECKING_BALLS[Team2].setInvisibility(Invis.ALL)
     WRECKING_BALLS.enablePlayerCollision()
 
-rule "Set Physics Ownership":
+rule "Set Physics Ownership (Damage)":
     @Event playerDealtDamage
     @Hero all
     @Condition victim in WRECKING_BALLS
@@ -159,6 +159,20 @@ rule "Set Physics Ownership":
     TEAM_PHYSICS_OWNERSHIP = eventPlayer.getTeam()
     wait(0.032)
     APPLY_IMPULSE()
+    ATTACHING_ALLOWED = true
+
+rule "Set Physics Ownership (Knockback)":
+    @Event playerDealtKnockback
+    @Hero all
+    @Condition victim in WRECKING_BALLS
+    @Condition ATTACHING_ALLOWED == true
+    @Condition TEAM_PHYSICS_OWNERSHIP != eventPlayer.getTeam()
+    @Condition all([not ball.hasStatusEffect(Status.HACKED) for ball in WRECKING_BALLS])
+    
+    ATTACHING_ALLOWED = false
+    TEAM_PHYSICS_OWNERSHIP = eventPlayer.getTeam()
+    wait(0.032)
+    victim.applyImpulse(eventDirection, SETTING_LAUNCH_RATE * 25, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
     ATTACHING_ALLOWED = true
 
 rule "Set Last Pushed Player":
@@ -191,8 +205,7 @@ rule "Set Ball Outlines":
 
     wait(0.032)
     WRECKING_BALLS.disableNameplatesFor(eventPlayer)
-    WRECKING_BALLS[Team1].startForcingOutlineFor(eventPlayer, true, Color.TEAM_2, OutlineVisibility.ALWAYS)
-    WRECKING_BALLS[Team2].startForcingOutlineFor(eventPlayer, true, Color.TEAM_1, OutlineVisibility.ALWAYS)
+    WRECKING_BALLS.startForcingOutlineFor(eventPlayer, true, Color.WHITE, OutlineVisibility.ALWAYS)
 
 rule "Set Team Ownership When Reinhardt Pins Ball":
     @Event eachPlayer
