@@ -57,6 +57,7 @@ rule "Setup":
     getPlayers(Team.2).exclude(WRECKING_BALLS).setFacing(directionTowards(TEAM_2_GOAL[0], TEAM_1_GOAL[0]), Relativity.TO_WORLD)
     getPlayers(Team.1).exclude(WRECKING_BALLS).teleport(TEAM_1_GOAL[0])
     getPlayers(Team.2).exclude(WRECKING_BALLS).teleport(TEAM_2_GOAL[0])
+    getAllPlayers().exclude(WRECKING_BALLS).disablePlayerCollision()
     DISABLE_ABILITIES()
     
     TEAM_PHYSICS_OWNERSHIP = getOppositeTeam(TEAM_PHYSICS_OWNERSHIP)
@@ -72,6 +73,7 @@ rule "Round":
     @Condition CURRENT_GAME_STATE == GAME_STATE.ROUND
 
     getAllPlayers().exclude(WRECKING_BALLS).clearStatusEffect(Status.ROOTED)
+    getAllPlayers().exclude(WRECKING_BALLS).enablePlayerCollision()
     ENABLE_ABILITIES()
     chase(TIME_REMAINING, 0, rate=1, ChaseReeval.NONE)
 
