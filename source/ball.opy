@@ -83,7 +83,7 @@ def KILL_BALL():
     getAllPlayers().enableMessages()
 
 def APPLY_IMPULSE():
-    victim.applyImpulse(directionTowards(attacker.getPosition(), victim.getPosition()), eventDamage * SETTING_LAUNCH_RATE if eventAbility == Button.MELEE or (eventAbility == Button.SECONDARY_FIRE and eventPlayer.getCurrentHero() == Hero.LUCIO) or (eventAbility == Button.ABILITY_2 and eventPlayer.getCurrentHero() == Hero.WIDOWMAKER) else (eventDamage / 5) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
+    victim.applyImpulse(directionTowards(attacker.getPosition(), victim.getPosition()), eventDamage * SETTING_LAUNCH_RATE if eventAbility == Button.MELEE or (eventAbility == Button.SECONDARY_FIRE and eventPlayer.getCurrentHero() == Hero.LUCIO) or (eventAbility == Button.ABILITY_2 and eventPlayer.getCurrentHero() == Hero.WIDOWMAKER) else (eventDamage / 8) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
 
 def SET_PHYSICS_OWNERSHIP_START():
     WRECKING_BALLS.disablePlayerCollision()
@@ -183,7 +183,7 @@ rule "Apply Healing Impulse":
     @Condition not healer in WRECKING_BALLS
     @Condition healee in WRECKING_BALLS
     
-    WRECKING_BALLS.applyImpulse(directionTowards(healer.getPosition(), WRECKING_BALLS.getPosition()), (eventHealing / 3) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
+    WRECKING_BALLS.applyImpulse(directionTowards(healer.getPosition(), WRECKING_BALLS.getPosition()), (eventHealing / 5) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
 
 rule "Set Ball Outlines":
     @Event eachPlayer
