@@ -175,8 +175,15 @@ rule "Set Physics Ownership (Knockback)":
     victim.applyImpulse(eventDirection, SETTING_LAUNCH_RATE * 25, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
     ATTACHING_ALLOWED = true
 
-rule "Set Last Pushed Player":
+rule "Set Last Pushed Player (Damage)":
     @Event playerDealtDamage
+    @Hero all
+    @Condition victim in WRECKING_BALLS
+
+    LAST_PUSHED_PLAYER = eventPlayer
+
+rule "Set Last Pushed Player (Knockback)":
+    @Event playerDealtKnockback
     @Hero all
     @Condition victim in WRECKING_BALLS
 
