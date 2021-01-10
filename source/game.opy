@@ -93,6 +93,11 @@ rule "Score":
     # Kill any hero duplicating
     kill([player for player in getPlayersOnHero(Hero.ECHO, Team.ALL) if player.isDuplicatingAHero()], null)
 
+    # Kill any player currently in their ultimate that can't be canceled by respawning.
+    #!define NON_RESPAWNABLE_ULTIMATE_HEROES [Hero.MERCY, Hero.ZENYATTA]
+    kill([player for player in getLivingPlayers(Team.ALL) if player.isUsingUltimate() and player.getCurrentHero() in NON_RESPAWNABLE_ULTIMATE_HEROES], null)
+    [player for player in getDeadPlayers(Team.ALL) if player.getCurrentHero() in NON_RESPAWNABLE_ULTIMATE_HEROES].resurrect()
+
     DISABLE_ABILITIES()
 
     CURRENT_GAME_STATE = GAME_STATE.RESULT

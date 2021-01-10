@@ -150,6 +150,7 @@ rule "Set Physics Ownership to Team 2":
 rule "Set Physics Ownership (Damage)":
     @Event playerDealtDamage
     @Hero all
+    @Condition not attacker in WRECKING_BALLS
     @Condition victim in WRECKING_BALLS
     @Condition ATTACHING_ALLOWED == true
     @Condition TEAM_PHYSICS_OWNERSHIP != eventPlayer.getTeam()
@@ -164,6 +165,7 @@ rule "Set Physics Ownership (Damage)":
 rule "Set Physics Ownership (Knockback)":
     @Event playerDealtKnockback
     @Hero all
+    @Condition not attacker in WRECKING_BALLS
     @Condition victim in WRECKING_BALLS
     @Condition ATTACHING_ALLOWED == true
     @Condition TEAM_PHYSICS_OWNERSHIP != eventPlayer.getTeam()
@@ -178,6 +180,7 @@ rule "Set Physics Ownership (Knockback)":
 rule "Set Last Pushed Player (Damage)":
     @Event playerDealtDamage
     @Hero all
+    @Condition not attacker in WRECKING_BALLS
     @Condition victim in WRECKING_BALLS
 
     LAST_PUSHED_PLAYER = eventPlayer
@@ -185,13 +188,24 @@ rule "Set Last Pushed Player (Damage)":
 rule "Set Last Pushed Player (Knockback)":
     @Event playerDealtKnockback
     @Hero all
+    @Condition not attacker in WRECKING_BALLS
     @Condition victim in WRECKING_BALLS
 
     LAST_PUSHED_PLAYER = eventPlayer
 
+rule "Set Last Pushed Player (Healing)":
+    @Event playerDealtHealing
+    @Hero all
+    @Condition not healer in WRECKING_BALLS
+    @Condition healee in WRECKING_BALLS
+
+    LAST_PUSHED_PLAYER = eventPlayer
+    wait(1)
+
 rule "Apply Impulse":
     @Event playerDealtDamage
     @Hero all
+    @Condition not attacker in WRECKING_BALLS
     @Condition victim in WRECKING_BALLS
     
     APPLY_IMPULSE()

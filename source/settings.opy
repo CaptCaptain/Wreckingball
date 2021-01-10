@@ -23,6 +23,7 @@ settings {
 
 globalvar GLOBAL_INDEX = 0
 playervar PLAYER_INDEX = 0
+globalvar CURRENT_VERSION = '1.3.0'
 
 enum GAME_STATE:
     WAITING_FOR_PLAYERS,

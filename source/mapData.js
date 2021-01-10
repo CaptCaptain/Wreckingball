@@ -29,6 +29,14 @@ let availableMapData = {
 availableMapData.WORKSHOP_ISLAND_NIGHT = availableMapData.WORKSHOP_ISLAND
 availableMapData.WORKSHOP_EXPANSE_NIGHT = availableMapData.WORKSHOP_EXPANSE
 
+const dataType = {
+    TEAM_1_SPAWN: 0,
+    TEAM_2_SPAWN: 1,
+    ARENA: 2,
+    BALL_SPAWNS: 3
+}
+
+
 let maps = ''
 let team_1_spawn = ''
 let team_2_spawn = ''
@@ -40,13 +48,13 @@ result = ''
 for (var mapData in availableMapData) {
     maps += 'Map.'+mapData+', '
     for (var data in mapData) {
-        if (data == 0) {
+        if (data == dataType.TEAM_1_SPAWN) {
             team_1_spawn += availableMapData[mapData].TEAM_1_SPAWN+', '
-        } else if (data == 1) {
+        } else if (data == dataType.TEAM_2_SPAWN) {
             team_2_spawn += availableMapData[mapData].TEAM_2_SPAWN+', '
-        } else if (data == 2) {
+        } else if (data == dataType.ARENA) {
             arena += availableMapData[mapData].ARENA+', '
-        } else if (data == 3) {
+        } else if (data == dataType.BALL_SPAWNS) {
             ball_spawns += availableMapData[mapData].BALL_SPAWNS+', '
         }
     }
