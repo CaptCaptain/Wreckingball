@@ -107,7 +107,11 @@ rule "Keep in Arena":
     if eventPlayer in WRECKING_BALLS == false and (eventPlayer.getCurrentHero() == Hero.REINHARDT and eventPlayer.isUsingAbility1()): eventPlayer.cancelPrimaryAction()
 
     # Accelerate players toward the goal whose team has ownership of the ball
-    eventPlayer.startAcceleration(directionTowards(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(TEAM_PHYSICS_OWNERSHIP)]), 500, 1000, Relativity.TO_WORLD, AccelReeval.DIRECTION_RATE_AND_MAX_SPEED)
+    eventPlayer.startAcceleration(directionTowards(vect(eventPlayer.getPosition().x, [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(TEAM_PHYSICS_OWNERSHIP)].y, eventPlayer.getPosition().z), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(TEAM_PHYSICS_OWNERSHIP)]), 500, 1000, Relativity.TO_WORLD, AccelReeval.DIRECTION_RATE_AND_MAX_SPEED)
+
+    if not eventPlayer in WRECKING_BALLS and distance(vect(eventPlayer.getPosition().x, ARENA[0].y, eventPlayer.getPosition().z), ARENA[0]) > ARENA[1] + 13:
+        eventPlayer.teleport(eventPlayer.getPosition() + directionTowards(vect(eventPlayer.getPosition().x, ARENA[0].y, eventPlayer.getPosition().z), ARENA[0]))
     wait()
     if RULE_CONDITION: goto RULE_START
     eventPlayer.stopAcceleration()
+    eventPlayer.applyImpulse(directionTowards(Vector.DOWN, Vector.UP), 0.01, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION_XYZ)

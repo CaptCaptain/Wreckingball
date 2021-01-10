@@ -3,13 +3,13 @@ let availableMapData = {
         TEAM_1_SPAWN: '[vect(13, 0, 0), 3]',
         TEAM_2_SPAWN: '[vect(-13, 0, 0), 3]',
         ARENA: '[vect(0, 1, 0), 20]',
-        BALL_SPAWNS: '[vect(0, 0, 0)]'
+        BALL_SPAWNS: '[vect(0, 0, 0), vect(0, 0, 12), vect(0, 0, -12)]'
     },
     WORKSHOP_EXPANSE: {
         TEAM_1_SPAWN: '[vect(25, 0, 0), 4]',
         TEAM_2_SPAWN:'[vect(-25, 0, 0), 4]',
         ARENA: '[vect(0, 1, 0), 30]',
-        BALL_SPAWNS: '[vect(0, 0, 0)]',
+        BALL_SPAWNS: '[vect(0, 0, 0), vect(0, 0, 24), vect(0, 0, -24)]',
     },
     BUSAN: {
         TEAM_1_SPAWN: '[getObjectivePosition(1) + vect(30, 1.75, 0), 2]',
@@ -27,7 +27,9 @@ let availableMapData = {
 
 // Some maps are the same but take place in a different setting
 availableMapData.WORKSHOP_ISLAND_NIGHT = availableMapData.WORKSHOP_ISLAND
+availableMapData.WORKSHOP_CHAMBER = availableMapData.WORKSHOP_ISLAND
 availableMapData.WORKSHOP_EXPANSE_NIGHT = availableMapData.WORKSHOP_EXPANSE
+availableMapData.WORKSHOP_GREEN_SCREEN = availableMapData.WORKSHOP_EXPANSE
 
 const dataType = {
     TEAM_1_SPAWN: 0,

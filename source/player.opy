@@ -59,7 +59,7 @@ rule "Player Setup":
     
     eventPlayer.setPrimaryFireEnabled(false)
     eventPlayer.setStatusEffect(null, Status.INVINCIBLE, 9999)
-    #eventPlayer.disableScoreboard()
+    eventPlayer.disableScoreboard()
     eventPlayer.disableKillFeed()
     eventPlayer.setDamageReceived(500)
     eventPlayer.disableGamemodeHud()
