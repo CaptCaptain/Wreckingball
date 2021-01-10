@@ -104,7 +104,7 @@ rule "Keep in Arena":
     @Condition not eventPlayer.isInSpawnRoom()
     @Condition eventPlayer.getPosition().x > (ARENA[0] + vect(ARENA[1], 0, 0)).x or eventPlayer.getPosition().x < (ARENA[0] + vect(-ARENA[1], 0, 0)).x or eventPlayer.getPosition().z < (ARENA[0] + vect(0, 0, -ARENA[1])).z or eventPlayer.getPosition().z > (ARENA[0] + vect(0, 0, ARENA[1])).z
 
-    if eventPlayer in WRECKING_BALLS == false: eventPlayer.cancelPrimaryAction()
+    if eventPlayer in WRECKING_BALLS == false and (eventPlayer.getCurrentHero() == Hero.REINHARDT and eventPlayer.isUsingAbility1()): eventPlayer.cancelPrimaryAction()
 
     # Accelerate players toward the goal whose team has ownership of the ball
     eventPlayer.startAcceleration(directionTowards(eventPlayer.getPosition(), [TEAM_1_GOAL[0], TEAM_2_GOAL[0]][[Team.1, Team.2].index(TEAM_PHYSICS_OWNERSHIP)]), 500, 1000, Relativity.TO_WORLD, AccelReeval.DIRECTION_RATE_AND_MAX_SPEED)
