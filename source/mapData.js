@@ -15,7 +15,7 @@ let availableMapData = {
         TEAM_1_SPAWN: '[getObjectivePosition(1) + vect(30, 1.75, 0), 2]',
         TEAM_2_SPAWN:'[getObjectivePosition(1) + vect(-30, 1.75, 0), 2]',
         ARENA: '[getObjectivePosition(1) + vect(0, 3, 0), 35]',
-        BALL_SPAWNS: '[nearestWalkablePosition(getObjectivePosition(1))]',
+        BALL_SPAWNS: '[nearestWalkablePosition(getObjectivePosition(1) + vect(0, 0, -15)), nearestWalkablePosition(getObjectivePosition(1) + vect(0, 0, 15))]',
     },
     NEPAL: {
         TEAM_1_SPAWN: '[getObjectivePosition(0) + vect(2, -0.25, 16), 3]',

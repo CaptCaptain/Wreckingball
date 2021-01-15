@@ -199,6 +199,7 @@ rule "Set Last Pushed Player (Healing)":
     @Condition not healer in WRECKING_BALLS
     @Condition healee in WRECKING_BALLS
 
+    if healer.getCurrentHero() == Hero.LUCIO: return
     LAST_PUSHED_PLAYER = eventPlayer
     wait(1)
 
@@ -250,3 +251,21 @@ rule "Zarya Bubble Disappearing Fix":
     waitUntil(all([not ball.hasStatusEffect(Status.INVINCIBLE) for ball in WRECKING_BALLS]), 9999)
 
     WRECKING_BALLS.setDamageReceived(100)
+
+rule "Set Team Ownership When Sombra Hacks Ball":
+    @Condition any([ball.hasStatusEffect(Status.HACKED) for ball in WRECKING_BALLS])
+
+    if (WRECKING_BALLS[Team1].hasStatusEffect(Status.HACKED) and TEAM_PHYSICS_OWNERSHIP == Team.1) or (WRECKING_BALLS[Team2].hasStatusEffect(Status.HACKED) and TEAM_PHYSICS_OWNERSHIP == Team.2):
+        TEAM_PHYSICS_OWNERSHIP = getOppositeTeam(TEAM_PHYSICS_OWNERSHIP)
+
+rule "Lower Ball Health for Echo Beam":
+    @Event playerDealtDamage
+    @Hero echo
+    @Condition not eventPlayer.isDuplicatingAHero()
+    @Condition eventPlayer.isUsingAbility2()
+    @Condition not attacker in WRECKING_BALLS
+    @Condition victim in WRECKING_BALLS
+    @Condition ATTACHING_ALLOWED
+
+    damage(victim, null, victim.getMaxHealthOfType(Health.NORMAL))
+    wait(0.5)

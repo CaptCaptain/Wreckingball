@@ -3,10 +3,11 @@
 #!define halfAbilityCooldown(button) eventPlayer.setAbilityCooldown(button, eventPlayer.getAbilityCooldown(button) / 2)
 
 playervar HUDS = []
-globalvar HeroRoster = getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN, Hero.ASHE])
+globalvar HeroRoster = getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN, Hero.ASHE, Hero.BASTION])
 
 subroutine DESTROY_HUDS
 subroutine DESTROY_CONSTRUCTION
+subroutine RESTRICT_ABILITIES
 
 def DESTROY_CONSTRUCTION():
     eventPlayer.forceButtonPress(Button.INTERACT)
@@ -19,6 +20,14 @@ def DESTROY_HUDS():
     for eventPlayer.PLAYER_INDEX in range(0, len(eventPlayer.HUDS)):
         destroyHudText(eventPlayer.HUDS[GLOBAL_INDEX])
     eventPlayer.HUDS = []
+def RESTRICT_ABILITIES():
+    eventPlayer.setAbility1Enabled(true)
+    eventPlayer.setAbility2Enabled(true)
+    eventPlayer.setSecondaryFireEnabled(true)
+    switch eventPlayer.getCurrentHero():
+        case Hero.BAPTISTE:
+            eventPlayer.setAbility2Enabled(false)
+            break
 
 rule "Player Hud":
     @Event playerJoined
