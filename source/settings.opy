@@ -12,7 +12,7 @@ settings {
     "gamemodes": {
         "skirmish": {
             "enabledMaps": [
-                "workshopExpanseNight"
+                "workshopExpanse", "workshopIsland", "workshopIslandNight", "workshopExpanseNight", "busan", "nepal"
             ]
         },
         "general": {
