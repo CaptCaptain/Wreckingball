@@ -8,33 +8,33 @@ subroutine CLEAR_GOAL_EFFECTS
 def CREATE_GOAL_EFFECTS():
     # Team 1
     # Bottom
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
     # Top
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + (Vector.UP * TEAM_1_GOAL[1]) + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
     # Connecting bottom to top
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1], 0, -TEAM_1_GOAL[1]), TEAM_1_GOAL[0] + vect(-TEAM_1_GOAL[1] * 1.01, TEAM_1_GOAL[1], -TEAM_1_GOAL[1]), Color.TEAM_1, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
     # Team 1 Labels
@@ -45,33 +45,33 @@ def CREATE_GOAL_EFFECTS():
 
     # Team 2
     # Bottom
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
     # Top
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + (Vector.UP * TEAM_2_GOAL[1]) + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
     # Connecting bottom to top
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.BAD, TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
+    createBeam(getAllPlayers(), Beam.GOOD, TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1], 0, -TEAM_2_GOAL[1]), TEAM_2_GOAL[0] + vect(-TEAM_2_GOAL[1] * 1.01, TEAM_2_GOAL[1], -TEAM_2_GOAL[1]), Color.TEAM_2, EffectReeval.VISIBILITY_AND_COLOR)
     GOAL_EFFECTS.append(getLastCreatedEntity())
 
     # Team 2 Labels
