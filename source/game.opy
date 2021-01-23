@@ -38,8 +38,9 @@ rule "Reset Ball":
     @Condition (distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) < TEAM_2_GOAL[1] or distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) < TEAM_1_GOAL[1]) or (WRECKING_BALLS[Team1].isDead() and WRECKING_BALLS[Team2].isDead())
     @Condition CURRENT_GAME_STATE == GAME_STATE.WAITING_FOR_PLAYERS
     
+    wait(0.016, Wait.ABORT_WHEN_FALSE)
     KILL_BALL()
-    wait(1, Wait.ABORT_WHEN_FALSE)
+    wait(1)
     TEAM_PHYSICS_OWNERSHIP = getOppositeTeam(TEAM_PHYSICS_OWNERSHIP)
     RESET_BALL()
 
@@ -88,7 +89,7 @@ rule "Score":
     KILL_BALL()
     stopChasingVariable(TIME_REMAINING)
     setSlowMotion(30)
-    bigMessage(getAllPlayers() if (LAST_PUSHED_PLAYER.getTeam() == Team.1 and distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) < TEAM_2_GOAL[1]) or (LAST_PUSHED_PLAYER.getTeam() == Team.2 and distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) < TEAM_1_GOAL[1]) else null, "{} scored!".format(LAST_PUSHED_PLAYER))
+    bigMessage(getAllPlayers() if (LAST_PUSHED_PLAYER.getTeam() == Team.1 and distance(WRECKING_BALLS[Team1].getPosition(), TEAM_2_GOAL[0]) <= TEAM_2_GOAL[1]) or (LAST_PUSHED_PLAYER.getTeam() == Team.2 and distance(WRECKING_BALLS[Team2].getPosition(), TEAM_1_GOAL[0]) <= TEAM_1_GOAL[1]) else null, "{} scored!".format(LAST_PUSHED_PLAYER))
 
     # Kill any hero duplicating
     kill([player for player in getPlayersOnHero(Hero.ECHO, Team.ALL) if player.isDuplicatingAHero()], null)

@@ -39,6 +39,8 @@ def CREATE_BALL():
     WRECKING_BALL_EFFECTS.append(getLastCreatedText())
     WRECKING_BALLS.startForcingButton(Button.INTERACT)
     startDamageModification(WRECKING_BALLS, getPlayersOnHero(Hero.BRIGITTE, Team.ALL), 150, DamageReeval.RECEIVERS_AND_DAMAGERS)
+    startHealingModification(WRECKING_BALLS, getPlayersOnHero(Hero.MERCY, Team.ALL), 150, HealingReeval.RECEIVERS_AND_HEALERS)
+    startHealingModification(WRECKING_BALLS, getPlayersOnHero(Hero.MOIRA, Team.ALL), 150, HealingReeval.RECEIVERS_AND_HEALERS)
     WRECKING_BALLS.startScalingSize(SETTING_HAMMOND_SIZE, true)
 
 def RESET_BALL():
