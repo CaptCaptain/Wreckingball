@@ -42,6 +42,12 @@ def CREATE_BALL():
     startHealingModification(WRECKING_BALLS, getPlayersOnHero(Hero.MERCY, Team.ALL), 150, HealingReeval.RECEIVERS_AND_HEALERS)
     startHealingModification(WRECKING_BALLS, getPlayersOnHero(Hero.MOIRA, Team.ALL), 150, HealingReeval.RECEIVERS_AND_HEALERS)
     WRECKING_BALLS.startScalingSize(SETTING_HAMMOND_SIZE, true)
+    startDamageModification(WRECKING_BALLS, getPlayersOnHero(Hero.REINHARDT, Team.ALL), 150, DamageReeval.RECEIVERS_AND_DAMAGERS)
+    WRECKING_BALLS.startScalingSize(SETTING_HAMMOND_SIZE, true)
+    createEffect(getAllPlayers() if WRECKING_BALLS.getAltitude() < 100 else null, Effect.RING, Color.YELLOW, updateEveryTick(raycast(WRECKING_BALLS.getEyePosition(), WRECKING_BALLS.getEyePosition() + (Vector.DOWN * 1000), null, null, false).getHitPosition()), SETTING_HAMMOND_SIZE, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    WRECKING_BALL_EFFECTS.append(getLastCreatedEntity())
+    createBeam(getAllPlayers() if WRECKING_BALLS.getAltitude() < 100 else null, Beam.GOOD, updateEveryTick((WRECKING_BALLS.getEyePosition() + WRECKING_BALLS.getPosition()) / 2), updateEveryTick(raycast(WRECKING_BALLS.getEyePosition(), WRECKING_BALLS.getEyePosition() + (Vector.DOWN * 1000), null, null, false).getHitPosition()), Color.YELLOW, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    WRECKING_BALL_EFFECTS.append(getLastCreatedEntity())
 
 def RESET_BALL():
     BALL_RESETTING = true
@@ -85,7 +91,7 @@ def KILL_BALL():
     getAllPlayers().enableMessages()
 
 def APPLY_IMPULSE():
-    victim.applyImpulse(vect(eventDirection.x, 0, eventDirection.z), eventDamage * SETTING_LAUNCH_RATE if eventAbility == Button.MELEE or (eventAbility == Button.SECONDARY_FIRE and eventPlayer.getCurrentHero() == Hero.LUCIO) or (eventAbility == Button.ABILITY_2 and eventPlayer.getCurrentHero() == Hero.WIDOWMAKER) else (eventDamage / 8) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
+    victim.applyImpulse(vect(eventDirection.x, 0, eventDirection.z) if eventPlayer.getCurrentHero() != Hero.REINHARDT else directionTowards(vect(attacker.getPosition().x, WRECKING_BALLS.getPosition().y, attacker.getPosition().z), victim.getPosition()), eventDamage * SETTING_LAUNCH_RATE if eventAbility == Button.MELEE or (eventAbility == Button.SECONDARY_FIRE and eventPlayer.getCurrentHero() == Hero.LUCIO) or (eventAbility == Button.ABILITY_2 and eventPlayer.getCurrentHero() == Hero.WIDOWMAKER) else (eventDamage / 8) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
 
 def SET_PHYSICS_OWNERSHIP_START():
     WRECKING_BALLS.disablePlayerCollision()

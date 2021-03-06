@@ -70,7 +70,6 @@ rule "Player Setup":
     eventPlayer.setStatusEffect(null, Status.INVINCIBLE, 9999)
     eventPlayer.disableScoreboard()
     eventPlayer.disableKillFeed()
-    eventPlayer.setDamageReceived(500)
     eventPlayer.disableGamemodeHud()
     eventPlayer.setMoveSpeed(SETTING_SPEED_SCALAR * 100)
     eventPlayer.setJumpVerticalSpeed(100 + ((SETTING_SPEED_SCALAR * 100) / 4))
