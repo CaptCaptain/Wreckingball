@@ -85,7 +85,7 @@ def KILL_BALL():
     getAllPlayers().enableMessages()
 
 def APPLY_IMPULSE():
-    victim.applyImpulse(directionTowards(vect(attacker.getPosition().x, WRECKING_BALLS.getPosition().y, attacker.getPosition().z), victim.getPosition()), eventDamage * SETTING_LAUNCH_RATE if eventAbility == Button.MELEE or (eventAbility == Button.SECONDARY_FIRE and eventPlayer.getCurrentHero() == Hero.LUCIO) or (eventAbility == Button.ABILITY_2 and eventPlayer.getCurrentHero() == Hero.WIDOWMAKER) else (eventDamage / 8) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
+    victim.applyImpulse(vect(eventDirection.x, 0, eventDirection.z), eventDamage * SETTING_LAUNCH_RATE if eventAbility == Button.MELEE or (eventAbility == Button.SECONDARY_FIRE and eventPlayer.getCurrentHero() == Hero.LUCIO) or (eventAbility == Button.ABILITY_2 and eventPlayer.getCurrentHero() == Hero.WIDOWMAKER) else (eventDamage / 8) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
 
 def SET_PHYSICS_OWNERSHIP_START():
     WRECKING_BALLS.disablePlayerCollision()
@@ -221,7 +221,7 @@ rule "Apply Healing Impulse":
     @Condition not healer in WRECKING_BALLS
     @Condition healee in WRECKING_BALLS
     
-    WRECKING_BALLS.applyImpulse(directionTowards(vect(healer.getPosition().x, WRECKING_BALLS.getPosition().y, healer.getPosition().z), WRECKING_BALLS.getPosition()), (eventHealing / 5) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
+    WRECKING_BALLS.applyImpulse(vect(eventDirection.x, 0, eventDirection.z), (eventHealing / 5) * SETTING_LAUNCH_RATE, Relativity.TO_WORLD, Impulse.INCORPORATE_CONTRARY_MOTION)
 
 rule "Set Ball Outlines":
     @Event eachPlayer
@@ -245,14 +245,10 @@ rule "Set Team Ownership When Reinhardt Pins Ball":
     waitUntil(not eventPlayer.isUsingAbility1(), 3)
     WRECKING_BALLS.clearStatusEffect(Status.INVINCIBLE)
     ATTACHING_ALLOWED = true
-rule "Zarya Bubble Disappearing Fix":
+rule "Zarya Bubble Disappearing":
     @Condition any([ball.hasStatusEffect(Status.INVINCIBLE) for ball in WRECKING_BALLS])
 
-    WRECKING_BALLS.setDamageReceived(0)
-
-    waitUntil(all([not ball.hasStatusEffect(Status.INVINCIBLE) for ball in WRECKING_BALLS]), 9999)
-
-    WRECKING_BALLS.setDamageReceived(100)
+    damage(WRECKING_BALLS, null, 400)
 
 rule "Set Team Ownership When Sombra Hacks Ball":
     @Condition any([ball.hasStatusEffect(Status.HACKED) for ball in WRECKING_BALLS])

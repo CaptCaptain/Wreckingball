@@ -1,9 +1,9 @@
 #!mainFile "settings.opy"
 
-#!define halfAbilityCooldown(button) eventPlayer.setAbilityCooldown(button, eventPlayer.getAbilityCooldown(button) / 2)
+#!define halfAbilityCooldown(button) eventPlayer.setAbilityCooldown(button, eventPlayer.getAbilityCooldown(button) / 1.5)
 
 playervar HUDS = []
-globalvar HeroRoster = getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN, Hero.ASHE, Hero.BASTION])
+globalvar HeroRoster = getAllHeroes().exclude([Hero.HAMMOND, Hero.TORBJORN, Hero.ASHE, Hero.BASTION, Hero.SYMMETRA])
 
 subroutine DESTROY_HUDS
 subroutine DESTROY_CONSTRUCTION
@@ -189,7 +189,7 @@ rule "Reduce Ability 1 Cooldown":
     @Condition eventPlayer.isUsingAbility1() == false
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0
 
-    if eventPlayer.getCurrentHero() == Hero.ROADHOG or eventPlayer.getHeroOfDuplication() == Hero.ROADHOG: return
+    if (eventPlayer.getCurrentHero() == Hero.ROADHOG or eventPlayer.getHeroOfDuplication() == Hero.ROADHOG) or (eventPlayer.getCurrentHero() == Hero.ZARYA or eventPlayer.getHeroOfDuplication() == Hero.ZARYA): return
     halfAbilityCooldown(Button.ABILITY_1)
 
 rule "Reduce Ability 2 Cooldown":
@@ -198,7 +198,7 @@ rule "Reduce Ability 2 Cooldown":
     @Condition eventPlayer.isUsingAbility2() == false
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) > 0
 
-    if (eventPlayer.getCurrentHero() == Hero.SOMBRA or eventPlayer.getHeroOfDuplication() == Hero.SOMBRA) or (eventPlayer.getCurrentHero() == Hero.MEI or eventPlayer.getHeroOfDuplication() == Hero.MEI): return
+    if (eventPlayer.getCurrentHero() == Hero.SOMBRA or eventPlayer.getHeroOfDuplication() == Hero.SOMBRA) or (eventPlayer.getCurrentHero() == Hero.MEI or eventPlayer.getHeroOfDuplication() == Hero.MEI) or (eventPlayer.getCurrentHero() == Hero.ZARYA or eventPlayer.getHeroOfDuplication() == Hero.ZARYA): return
     halfAbilityCooldown(Button.ABILITY_2)
 
 rule "Reduce Secondary Cooldown":
