@@ -44,9 +44,9 @@ def CREATE_BALL():
     WRECKING_BALLS.startScalingSize(SETTING_HAMMOND_SIZE, true)
     startDamageModification(WRECKING_BALLS, getPlayersOnHero(Hero.REINHARDT, Team.ALL), 150, DamageReeval.RECEIVERS_AND_DAMAGERS)
     WRECKING_BALLS.startScalingSize(SETTING_HAMMOND_SIZE, true)
-    createEffect(getAllPlayers() if WRECKING_BALLS.getAltitude() < 100 else null, Effect.RING, Color.YELLOW, updateEveryTick(raycast(WRECKING_BALLS.getEyePosition(), WRECKING_BALLS.getEyePosition() + (Vector.DOWN * 1000), null, null, false).getHitPosition()), SETTING_HAMMOND_SIZE, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers() if any([ball.getAltitude() < 100 for ball in WRECKING_BALLS]) else null, Effect.RING, Color.YELLOW, updateEveryTick(raycast(WRECKING_BALLS.getEyePosition(), WRECKING_BALLS.getEyePosition() + (Vector.DOWN * 1000), null, null, false).getHitPosition()), SETTING_HAMMOND_SIZE, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     WRECKING_BALL_EFFECTS.append(getLastCreatedEntity())
-    createBeam(getAllPlayers() if WRECKING_BALLS.getAltitude() < 100 else null, Beam.GOOD, updateEveryTick((WRECKING_BALLS.getEyePosition() + WRECKING_BALLS.getPosition()) / 2), updateEveryTick(raycast(WRECKING_BALLS.getEyePosition(), WRECKING_BALLS.getEyePosition() + (Vector.DOWN * 1000), null, null, false).getHitPosition()), Color.YELLOW, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers() if any([ball.getAltitude() < 100 for ball in WRECKING_BALLS]) else null, Beam.GOOD, updateEveryTick((WRECKING_BALLS.getEyePosition() + WRECKING_BALLS.getPosition()) / 2), updateEveryTick(raycast(WRECKING_BALLS.getEyePosition(), WRECKING_BALLS.getEyePosition() + (Vector.DOWN * 1000), null, null, false).getHitPosition()), Color.YELLOW, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     WRECKING_BALL_EFFECTS.append(getLastCreatedEntity())
 
 def RESET_BALL():

@@ -43,7 +43,7 @@ globalvar SETTING_WHILE_YOU_WAIT = createWorkshopSetting(bool, "Ruleset", "Enabl
 
 globalvar SETTING_LAUNCH_RATE = createWorkshopSetting(float[0.1:2], "Advanced", "Launch Rate", 1, 0)
 globalvar SETTING_HAMMOND_SIZE = createWorkshopSetting(float[0.1:5], "Advanced", "Wrecking Ball Size Scalar", 1.5, 0)
-globalvar SETTING_SPEED_SCALAR = createWorkshopSetting(float[1:2], "Advanced", "Player Speed Scalar", 2, 1) 
+globalvar SETTING_SPEED_SCALAR = createWorkshopSetting(float[1:2], "Advanced", "Player Speed Scalar", 1.75, 1) 
 
 globalvar TEAM_1_SCORE = 0
 globalvar TEAM_2_SCORE = 0
